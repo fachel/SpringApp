@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>user</title>
+</head>
+<body>
+    <form method="post" th:action="@{/user}">
+        <input type="hidden" name="userId" th:value="${user.id}"/>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        <div>
+            <label>User Name :</label>
+            <input th:value="${user.username}" name="username" type="text"/>
+        </div>
+        <div>
+            <label>Password :</label>
+            <input th:value="${user.password}" name="password" type="text"/>
+        </div>
+        <div>
+            <label>Phone :</label>
+            <input th:value="${user.phone_number}" name="phone_number" type="text"/>
+        </div>
+        <div>
+            <label>Roles :</label>
+            <div th:each="role : ${roles}">
+                <label th:text="${role}"></label>
+                <input type="checkbox" th:name="${role}" th:checked="${user.roles[0]==role ? true : false}">
+            </div>
+        </div>
+        <button type="submit">save</button>
+    </form>
+</body>
+</html>
